@@ -19,7 +19,15 @@ using namespace std;
  * 
  */
 int main(int argc, char** argv) {
-
+    POINT *A, *B, *C;
+    double X,Y;
+    
+    //Todo
+    
+    cout<<"Bitte x y für A eingeben: ";
+    cin>>X>>Y;
+    A=new POINT (X,Y);
+    
     return 0;
 }
 
