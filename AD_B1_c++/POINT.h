@@ -22,6 +22,7 @@ public:
     
     double getX();
     double getY();
+    bool equalTo(POINT in_point);
     
 private:
     double x;

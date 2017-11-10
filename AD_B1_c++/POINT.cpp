@@ -29,6 +29,12 @@ POINT::POINT(const POINT& orig) {
 POINT::~POINT() {
 }
 
+bool POINT::equalTo(POINT in_point){
+    // wenn gleich return 0 ... wenn ungleich return 1
+    if(this->x==in_point.x && this->y==in_point.y){return true;}
+    else{return false;}        
+}
+
 double POINT::getX() {
     return this->x;
 }

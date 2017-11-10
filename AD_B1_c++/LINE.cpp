@@ -14,6 +14,8 @@
 #include "LINE.h"
 #include "POINT.h"
 
+
+
 LINE::LINE() {}
 LINE::LINE(const LINE& orig) {}
 LINE::~LINE() {}
@@ -28,7 +30,7 @@ LINE::LINE(POINT* P1, POINT* P2){
     //Todo
 }
 
-LINE::meets(LINE* L){
+LINE::*meets(LINE* L){
     //Todo
 }
 

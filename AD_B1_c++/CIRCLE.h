@@ -13,6 +13,9 @@
 
 #ifndef CIRCLE_H
 #define CIRCLE_H
+#include "LINE.h"
+#include "POINT.h"
+
 
 class CIRCLE {
 public:

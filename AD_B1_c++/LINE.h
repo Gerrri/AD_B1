@@ -13,6 +13,9 @@
 
 #ifndef LINE_H
 #define LINE_H
+#include "POINT.h"
+
+
 
 class LINE {
 public:
@@ -23,7 +26,7 @@ public:
     LINE(double X1, double Y1, double X2, double Y2);
     LINE(POINT *P1, POINT *P2);
     
-    POINT * meets (LINE *L);
+    POINT *meets (LINE *L);
     int parallelTo(LINE *L);
     
     
@@ -31,7 +34,7 @@ private:
     double A;
     double B;
     double C;
-    void normalize(void);
+    normalize(void);
 };
 
 #endif /* LINE_H */
