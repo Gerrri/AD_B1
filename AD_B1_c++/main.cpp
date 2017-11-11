@@ -19,15 +19,12 @@
 
 using namespace std;
 
-/*
- * 
- */
 int main(int argc, char** argv) {
     POINT *A, *B, *C;
     double X,Y;
     
-    //Todo
-    
+
+    // AUFGABE 1 -> Einlesen der Punkte A,B,C 
     cout<<"Bitte x y für A eingeben: \n";
     cout<<"x: ";
     cin>>X;
@@ -54,14 +51,45 @@ int main(int argc, char** argv) {
     cout<<"B :"<<B->getX()<<"/"<<B->getY()<<"\n";
     cout<<"C :"<<C->getX()<<"/"<<C->getY()<<"\n";
     
+    // Aufgabe 2 Abbrechn fals Punkte Doppelt
     // Vergleichen von A/B A/C C/B (einzelne Attribute)
     if(A->equalTo(*B) || B->equalTo(*C) || C->equalTo(*B)){
         cout<<"\nFehler [mind. 2 mal der Gleiche Punkt]- Bitte starten Sie das Programm Neu!";
         return 0;
     }
     
+    // Aufgabe 3 Konstruieren von Hilfskreisen um Punkte A,B,C sodass sich 2 Kreise schneiden
+    // hilfskreis A/B A/C C/B mir Methode "hilfskreis"
+    CIRCLE AB_hkreis = hilfskreis(*A,*B);
+    CIRCLE BA_hkreis = hilfskreis(*B,*A);
+    CIRCLE BC_hkreis = hilfskreis(*B,*C);
+    CIRCLE CB_hkreis = hilfskreis(*C,*B);
+    
+    
+    // A4
+    // Geraden (von schnittpunkten)ermitteln A/B B/C
+    LINE AB_schnitt_gerade = A_hkreis.intersects(*B);
+    LINE BC_schnitt_gerade = B_hkreis.intersects(*C);
+    
+    
+    
+ 
+ 
+    
+    
+    
 
     
     return 0;
 }
 
+//Hilfskreis Funktion
+CIRCLE hilfskreis(POINT A, POINT B){
+    double d,R,R_final;
+    d = A.distanceTo(*B); 
+    R = d/2; // Radius damit sich die Kreise berühren
+    R_final = R+(R/10000); // Radius ein wenig vergrößert damit sich die Kreise schneiden
+        
+    CIRCLE a = new CIRCLE(A,R_final);
+    return (a);
+}

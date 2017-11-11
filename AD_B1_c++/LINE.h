@@ -23,6 +23,7 @@ public:
     LINE(const LINE& orig);
     virtual ~LINE();
     
+
     LINE(double X1, double Y1, double X2, double Y2);
     LINE(POINT *P1, POINT *P2);
     
@@ -34,6 +35,9 @@ private:
     double A;
     double B;
     double C;
+    
+   // POINT A_oL;
+   // POINT B_oL;
     normalize(void);
 };
 

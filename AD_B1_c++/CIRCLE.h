@@ -27,10 +27,23 @@ public:
     CIRCLE (double X, double Y, double R);
     
     LINE *intersects(CIRCLE *C);
+
+    POINT* getMiddle() const {return Middle;}
+    double getRadius() const {return Radius;}
+    double getFlaeche() const {return flaeche;}    
+    double getUmfang() const {return umfang;} 
     
-    
+    void setMiddle(POINT* Middle) {this->Middle = Middle;}
+    void setRadius(double Radius) {this->Radius = Radius;}
+    void setFlaeche(double flaeche) {this->flaeche = flaeche;}
+    void setUmfang(double umfang) {this->umfang = umfang;}
+
+   
 private:
     POINT *Middle;
+    double Radius;
+    double umfang;
+    double flaeche;
 };
 
 #endif /* CIRCLE_H */

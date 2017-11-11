@@ -22,7 +22,12 @@ public:
     
     double getX();
     double getY();
+    void setX();
+    void setY();
+    
     bool equalTo(POINT in_point);
+    double distanceTo(POINT in_point);
+    double getBetrag ();
     
 private:
     double x;

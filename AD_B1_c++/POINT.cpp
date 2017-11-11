@@ -35,6 +35,15 @@ bool POINT::equalTo(POINT in_point){
     else{return false;}        
 }
 
+double POINT::distanceTo(POINT in_point){
+    //Distanz zwischen zwei Punkten
+    double d,temp;
+    temp = pow(this->x - in_point.x,2) + pow(this->y -in_point.y,2); // FORMEL : (x1 - x2)^2 + (y1 - y2)^2 
+    d = sqrt(temp); // Wurzel von temp
+    d = fabs(d); //Betrag von d
+    return d;
+}
+
 double POINT::getX() {
     return this->x;
 }
@@ -42,4 +51,17 @@ double POINT::getX() {
 double POINT::getY() {
     return this->y;
 }
+
+void POINT::setX(double dx) {
+    this->x = dx;
+}
+
+void POINT::setY(double dy) {
+    this->y = dy;
+}
+
+double POINT::getBetrag(){
+    
+}
+
 

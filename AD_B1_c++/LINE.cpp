@@ -11,10 +11,9 @@
  * Created on 9. November 2017, 13:05
  */
 
+
 #include "LINE.h"
 #include "POINT.h"
-
-
 
 LINE::LINE() {}
 LINE::LINE(const LINE& orig) {}
