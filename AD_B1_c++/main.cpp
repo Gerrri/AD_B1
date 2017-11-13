@@ -80,12 +80,11 @@ int main(int argc, char** argv) {
         return 0;
     }
     
-    POINT Mitte_Kreis_neu = AB_schnitt_gerade->meets(BC_schnitt_gerade); // neuer Punkt -> Schnittpunkt der beiden geraden
-    double Radius_Kreis_neu = Mitte_Kreis_neu.distanceTo(*A);            // neuer Radius -> Radius = Abstand neuer Punkt zu einem der Ausgangspunkte
+    double abcdefghijklmnop = AB_schnitt_gerade->meets(BC_schnitt_gerade).getY();
+    POINT *Mitte_Kreis_neu = new POINT(AB_schnitt_gerade->meets(BC_schnitt_gerade).getX(),AB_schnitt_gerade->meets(BC_schnitt_gerade).getY()); // neuer Punkt -> Schnittpunkt der beiden geraden
+    double Radius_Kreis_neu = Mitte_Kreis_neu->distanceTo(*A);            // neuer Radius -> Radius = Abstand neuer Punkt zu einem der Ausgangspunkte
     
-    POINT *n=&Mitte_Kreis_neu;
-    
-    CIRCLE *Kreis_neu = new CIRCLE(n,Radius_Kreis_neu);    // Neuer Kreis auf dem sich alle Drei Punkte Befinden
+    CIRCLE *Kreis_neu = new CIRCLE(Mitte_Kreis_neu,Radius_Kreis_neu);    // Neuer Kreis auf dem sich alle Drei Punkte Befinden
     
     
     //Ausgabe

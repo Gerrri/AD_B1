@@ -23,17 +23,17 @@ LINE::~LINE() {}
 
 
 LINE::LINE(double X1, double Y1, double X2, double Y2){
-    this->A= X1-X2;           //P1.X - P2.X [x]
-    this->B= Y1-Y2;           //P1.Y -P2.Y  [y]
-    this->C= Y2 - (this->A/this->B) * X2; // P2.Y-(A/B)*P2.X [y-achsen-Abschnitt]
+    this->A= X1;                //P1.X
+    this->B= Y1;                //P1.Y
+    this->C= (Y2-Y1)/(X2-X1);   //Steigung
     normalize();
 }
 
 LINE::LINE(POINT *P1, POINT *P2){
     //Formel: x= P1 + C*P2
-    this->A= P1->getX()-(P2->getX()); //P1.X - P2.X [x]
-    this->B= P1->getY()-(P2->getY()); //P1.Y -P2.Y  [y]
-    this->C= P2->getY() - (this->A/this->B) * P2->getX(); // P2.Y-(A/B)*P2.X [y-achsen-Abschnitt]
+    this->A= P1->getX();//P1->getX()-(P2->getX());              //P1.X
+    this->B= P2->getY();//P1->getY()-(P2->getY());              //P1.Y
+    this->C= (P2->getY()-P1->getY())/(P2->getX()-P1->getX());   //Steigung
     normalize();
 }
 
@@ -50,13 +50,14 @@ POINT LINE :: meets (LINE* L){ //meets
     
     double x,y,A,C,b,d; //x=(d-b)/(A-C) y=A*x+b
     
-    //Ax+b
-    A= this->B/this->A; //A=y:x
-    b= this->C;
+    //Ax+b (this)
+    A= this->C;                     //
+    b= this->B-(this->A*this->C);    //Steigung
+ 
     
     //Cx+d
-    C= L->B/L->B;       //C=y:x
-    d= L->C;
+    C= L->C;     //C=y:x
+    d= L->B-(L->A*L->C);
     
     x=(d-b)/(A-C);
     y=A*x+b;

@@ -27,6 +27,7 @@ public:
     CIRCLE (double X, double Y, double R);
     
     LINE *intersects(CIRCLE *C);
+    
 
     POINT* getMiddle() const {return Middle;}
     double getRadius() const {return Radius;}

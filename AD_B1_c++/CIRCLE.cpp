@@ -43,8 +43,43 @@ CIRCLE::CIRCLE(double X, double Y, double R){
     this->flaeche = M_PI*pow(R,2);
 }
 
+LINE *CIRCLE::intersects(CIRCLE* C) {
+
+
+
+    POINT * n1 = new POINT(
+            2 * (this->Middle->getX() - C->Middle->getX()),
+            2 * (this->Middle->getY() - C->Middle->getY()));
+    POINT * n2 = new POINT(n1->getY(), -n1->getX()); // orthogonal to n1
+
+    double c = (C->Middle * C->Middle - this->Middle * this->Middle) -
+            (C->Radius * C->Radius - this->Radius * this->Radius);
+
+    double s = -c / (n1->getBetrag() * n1->getBetrag()); // lambda s
+
+    double p_half = (*n2 * *this->Middle) / (n1->getBetrag() * n1->getBetrag());
+    double q = (c * c) / (n1->getBetrag() * n1->getBetrag() * n1->getBetrag() * n1->getBetrag()) +
+            (2 * c * (*n1 * *this->Middle)) / (n1->getBetrag() * n1->getBetrag() * n1->getBetrag() * n1->getBetrag()) +
+            (*this->Middle * *this->Middle - this->Radius * this->Radius) / (n1->getBetrag() * n1->getBetrag());
+
+    double sqrtVal = sqrt(p_half*p_half - q);
+    double d1 = p_half - sqrtVal;
+    double d2 = p_half + sqrtVal;
+    
+    POINT s1 = *n1 * s + *n2 * d1;
+    POINT s2 = *n1 * s + *n2 * d2;
+    
+    delete n1;
+    delete n2;
+    
+    return new LINE(&s1, &s2);
+    
+}
+
+
+/*
 LINE* CIRCLE::intersects(CIRCLE* C) {
-/*    
+   
     //Formel aus Vorlesung umgesetzt // unten versuch es ohne vektoren selber zu realisieren
     POINT * n1 = new POINT(
             2 * (this->Middle->getX() - C->Middle->getX()),
@@ -72,10 +107,10 @@ LINE* CIRCLE::intersects(CIRCLE* C) {
     delete n2;
     
     return new LINE(&s1, &s2);
- */   
+ 
     
-    
-  
+  */  
+  /*
     POINT *A_p = this->Middle;           //Mittelpunkt this
     POINT *B_p = C->getMiddle();         //Mittelpunkt C
     double a  = this->Radius;           //Rad Kreis this
@@ -115,7 +150,7 @@ LINE* CIRCLE::intersects(CIRCLE* C) {
     return ret_line;
    
 }
-
+*/
 
 
 
