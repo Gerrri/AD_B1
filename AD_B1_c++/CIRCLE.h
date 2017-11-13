@@ -37,6 +37,7 @@ public:
     void setRadius(double Radius) {this->Radius = Radius;}
     void setFlaeche(double flaeche) {this->flaeche = flaeche;}
     void setUmfang(double umfang) {this->umfang = umfang;}
+    
 
    
 private:

@@ -22,6 +22,7 @@ using namespace std;
 int main(int argc, char** argv) {
     POINT *A, *B, *C;
     double X,Y;
+    CIRCLE* hilfskreis(POINT *A, POINT *B);
     
 
     // AUFGABE 1 -> Einlesen der Punkte A,B,C 
@@ -59,21 +60,35 @@ int main(int argc, char** argv) {
     }
     
     // Aufgabe 3 Konstruieren von Hilfskreisen um Punkte A,B,C sodass sich 2 Kreise schneiden
-    // hilfskreis A/B A/C C/B mir Methode "hilfskreis"
-    CIRCLE AB_hkreis = hilfskreis(*A,*B);
-    CIRCLE BA_hkreis = hilfskreis(*B,*A);
-    CIRCLE BC_hkreis = hilfskreis(*B,*C);
-    CIRCLE CB_hkreis = hilfskreis(*C,*B);
+    // hilfskreis A/B B/A B/C C/B mit Methode "hilfskreis"
+    
+    
+    CIRCLE *AB_hkreis = hilfskreis(A,B);//hilfskreis(*A,*B);
+    CIRCLE *BA_hkreis = hilfskreis(B,A);
+    CIRCLE *BC_hkreis = hilfskreis(B,C);
+    CIRCLE *CB_hkreis = hilfskreis(C,B);
+    
     
     
     // A4
     // Geraden (von schnittpunkten)ermitteln A/B B/C
-    LINE AB_schnitt_gerade = A_hkreis.intersects(*B);
-    LINE BC_schnitt_gerade = B_hkreis.intersects(*C);
+    LINE *AB_schnitt_gerade = AB_hkreis->intersects(BA_hkreis); //gerade durch schnittpunkt A/B - B/A
+    LINE *BC_schnitt_gerade = BC_hkreis->intersects(CB_hkreis); //gerade durch schnittpunkt B/C - C/B
+    
+    if(AB_schnitt_gerade->parallelTo(BC_schnitt_gerade)==1){ //Abbruch wenn geraden paralle sind
+        cout<<"\nFehler [die Geraden sind Parallel]- Bitte starten Sie das Programm Neu!";
+        return 0;
+    }
+    
+    POINT Mitte_Kreis_neu = AB_schnitt_gerade->meets(BC_schnitt_gerade); // neuer Punkt -> Schnittpunkt der beiden geraden
+    double Radius_Kreis_neu = Mitte_Kreis_neu.distanceTo(*A);            // neuer Radius -> Radius = Abstand neuer Punkt zu einem der Ausgangspunkte
+    
+    CIRCLE Kreis_neu = new CIRCLE(Mitte_Kreis_neu,Radius_Kreis_neu);    // Neuer Kreis auf dem sich alle Drei Punkte Befinden
     
     
-    
- 
+    //Ausgabe
+    cout<<"Mittelpuntk bei : "<<Kreis_neu.getMiddle()->getX()<<"/"<<Kreis_neu.getMiddle()->getY()<<"\n";
+    cout<<"Radius bei : "<<Kreis_neu.getRadius()<<"\n";
  
     
     
@@ -84,12 +99,13 @@ int main(int argc, char** argv) {
 }
 
 //Hilfskreis Funktion
-CIRCLE hilfskreis(POINT A, POINT B){
+CIRCLE* hilfskreis(POINT *A, POINT *B){
     double d,R,R_final;
-    d = A.distanceTo(*B); 
+    d = A->distanceTo(*B); 
     R = d/2; // Radius damit sich die Kreise berühren
     R_final = R+(R/10000); // Radius ein wenig vergrößert damit sich die Kreise schneiden
         
-    CIRCLE a = new CIRCLE(A,R_final);
+    CIRCLE* a = new CIRCLE(A,R_final);
+   
     return (a);
 }

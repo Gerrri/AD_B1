@@ -12,18 +12,20 @@
  */
 
 #include "CIRCLE.h"
+#include "LINE.h"
+#include "POINT.h"
 #include <math.h>
 
 CIRCLE::CIRCLE() {}
 CIRCLE::CIRCLE(const CIRCLE& orig) {}
 CIRCLE::~CIRCLE() {}
 
-CIRCLE::CIRCLE(POINT* M, double R){ // ACHTUNG KOPIE VON M ERSTELLEN warum?!?!
+CIRCLE::CIRCLE(POINT* M, double R){ // ACHTUNG KOPIE VON M ERSTELLEN warum - sonst wird referenziertes Objekt veändert?!?!
     //Erstelle Kreis um Punkt(POINT M) mit Radius R
-    POINT punkt_m;
-    punkt_m.setX() =M->getX();      //M(x) Kopieren
-    punkt_m.setY() =M->getY();      //M(y) Kopieren
-    Middle = punkt_m;
+    POINT* punkt_m= new POINT(M->getX(),M->getY());
+    //*punkt_m.setX(*M->getX());    //M(x) Kopieren
+    //*punkt_m.setY(*M->getY());      //M(y) Kopieren
+    this->Middle = punkt_m;
     this->Radius = R;
     this->umfang = M_PI*2*R;
     this->flaeche = M_PI*pow(R,2);
@@ -32,15 +34,17 @@ CIRCLE::CIRCLE(POINT* M, double R){ // ACHTUNG KOPIE VON M ERSTELLEN warum?!?!
 
 CIRCLE::CIRCLE(double X, double Y, double R){
     //Erstelle Kreis um Punkt (X/Y) mit Radius R
-    this->Middle->setX() = X;
-    this->Middle->setY() = Y;
+    POINT* punkt_m= new POINT(X,Y);
+    this->Middle = punkt_m;
+    //this->Middle->setX(X);
+    //this->Middle->setY(Y);
     this->Radius = R;
     this->umfang = M_PI*2*R;
     this->flaeche = M_PI*pow(R,2);
 }
 
 LINE* CIRCLE::intersects(CIRCLE* C) {
-    
+/*    
     //Formel aus Vorlesung umgesetzt // unten versuch es ohne vektoren selber zu realisieren
     POINT * n1 = new POINT(
             2 * (this->Middle->getX() - C->Middle->getX()),
@@ -68,49 +72,51 @@ LINE* CIRCLE::intersects(CIRCLE* C) {
     delete n2;
     
     return new LINE(&s1, &s2);
+ */   
     
     
-/*    
-    LINE ret_line;
-    POINT A_p = this->Middle;           //Mittelpunkt this
-    POINT B_p = C->getMiddle();         //Mittelpunkt C
+  
+    POINT *A_p = this->Middle;           //Mittelpunkt this
+    POINT *B_p = C->getMiddle();         //Mittelpunkt C
     double a  = this->Radius;           //Rad Kreis this
     double b  = C->getRadius();         //Rad Kreis C
-    double c  = A_p.distanceTo(*B_p);   //Abstand a,b
+    double c  = A_p->distanceTo(*B_p);   //Abstand a,b
     double x,y;                         //zwischenspeicher
-    double Ax=A_p.getX();               //x von A
-    double Bx=B_p.getX();               //x von B
-    double Ay=A_p.getY();               //y von A
-    double By=B_p.getY();               //y von B
-    double temp;
+    double Ax=A_p->getX();               //x von A
+    double Bx=B_p->getX();               //x von B
+    double Ay=A_p->getY();               //y von A
+    double By=B_p->getY();               //y von B
+    double Q1_x,Q2_x,Q1_y,Q2_y;
     
-    POINT Q1; //Schnittpunkt 1
-    POINT Q2; //Schnittpunkt 2
+
    
     
     x=(pow(a,2)+pow(c,2)-pow(b,2))/2*c; //Kreisformel und Pythagoras kombiniert
     y=sqrt(pow(a,2)-pow(x,2));          //Pythagoras (einsetzen)
     
     // berechnung Q1(x)
-    temp    = Ax    +   x*  ((Bx-Ax)/c)   -   y*    ((By-Ay)/c);
-    Q1.setX(temp);
+    Q1_x    = Ax    +   x*  ((Bx-Ax)/c)   -   y*    ((By-Ay)/c);
     
     // berechnung Q2(x)
-    temp    = Ax    +   x*  ((Bx-Ax)/c)   +   y*    ((By-Ay)/c);
-    Q2.setX(temp);
+    Q2_x    = Ax    +   x*  ((Bx-Ax)/c)   +   y*    ((By-Ay)/c);
     
     // berechnung Q1(y)
-    temp    = Ay    +   x*  ((By-Ay)/c)   +   y*    ((Bx-Ax)/c);
-    Q1.setY(temp);
-   
+    Q1_y    = Ay    +   x*  ((By-Ay)/c)   +   y*    ((Bx-Ax)/c);
+ 
     // berechnung Q2(y)
-    temp    = Ay    +   x*  ((By-Ay)/c)   -   y*    ((Bx-Ax)/c);
-    Q2.setY(temp);
+    Q2_y    = Ay    +   x*  ((By-Ay)/c)   -   y*    ((Bx-Ax)/c);
+ 
     
-    ret_line = new LINE(*Q1,*Q2);
+    POINT* Q1 = new POINT(Q1_x,Q1_y); //Schnittpunkt 1
+    POINT* Q2 = new POINT(Q2_x,Q2_y); //Schnittpunkt 2
+    
+    
+    LINE *ret_line = new LINE(Q1,Q2);
     return ret_line;
- */  
+   
 }
+
+
 
 
 

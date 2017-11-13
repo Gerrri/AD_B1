@@ -27,9 +27,16 @@ public:
     LINE(double X1, double Y1, double X2, double Y2);
     LINE(POINT *P1, POINT *P2);
     
-    POINT *meets (LINE *L);
+    POINT meets (LINE *L);
     int parallelTo(LINE *L);
     
+    double getA() const {return A;}
+    double getB() const {return B;}
+    double getC() const {return C;}
+    
+    void setA(double A) {this->A = A;}
+    void setB(double B) {this->B = B;}
+    void setC(double C) {this->C = C;}
     
 private:
     double A;

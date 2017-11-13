@@ -22,8 +22,8 @@ public:
     
     double getX();
     double getY();
-    void setX();
-    void setY();
+    void setX(double);
+    void setY(double);
     
     bool equalTo(POINT in_point);
     double distanceTo(POINT in_point);
