@@ -61,7 +61,10 @@ void POINT::setY(double dy) {
 }
 
 double POINT::getBetrag(){
-    
+   double Betrag;
+   
+   Betrag = sqrt(pow(this->x,2)+pow(this->y,2));
+   return Betrag;
 }
 
 

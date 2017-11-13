@@ -41,6 +41,7 @@ CIRCLE::CIRCLE(double X, double Y, double R){
 
 LINE* CIRCLE::intersects(CIRCLE* C) {
     
+    //Formel aus Vorlesung umgesetzt // unten versuch es ohne vektoren selber zu realisieren
     POINT * n1 = new POINT(
             2 * (this->Middle->getX() - C->Middle->getX()),
             2 * (this->Middle->getY() - C->Middle->getY()));
