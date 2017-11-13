@@ -16,6 +16,7 @@
 #include <math.h>
 
 
+
 POINT::POINT(const double x, const double y) {
     this->x = x;
     this->y = y;

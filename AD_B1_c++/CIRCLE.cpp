@@ -92,7 +92,7 @@ LINE* CIRCLE::intersects(CIRCLE* C) {
    
     
     x=(pow(a,2)+pow(c,2)-pow(b,2))/2*c; //Kreisformel und Pythagoras kombiniert
-    y=sqrt(pow(a,2)-pow(x,2));          //Pythagoras (einsetzen)
+    y=sqrt(pow(a,2)+pow(x,2));          //Pythagoras (einsetzen)
     
     // berechnung Q1(x)
     Q1_x    = Ax    +   x*  ((Bx-Ax)/c)   -   y*    ((By-Ay)/c);

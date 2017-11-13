@@ -83,12 +83,14 @@ int main(int argc, char** argv) {
     POINT Mitte_Kreis_neu = AB_schnitt_gerade->meets(BC_schnitt_gerade); // neuer Punkt -> Schnittpunkt der beiden geraden
     double Radius_Kreis_neu = Mitte_Kreis_neu.distanceTo(*A);            // neuer Radius -> Radius = Abstand neuer Punkt zu einem der Ausgangspunkte
     
-    CIRCLE Kreis_neu = new CIRCLE(Mitte_Kreis_neu,Radius_Kreis_neu);    // Neuer Kreis auf dem sich alle Drei Punkte Befinden
+    POINT *n=&Mitte_Kreis_neu;
+    
+    CIRCLE *Kreis_neu = new CIRCLE(n,Radius_Kreis_neu);    // Neuer Kreis auf dem sich alle Drei Punkte Befinden
     
     
     //Ausgabe
-    cout<<"Mittelpuntk bei : "<<Kreis_neu.getMiddle()->getX()<<"/"<<Kreis_neu.getMiddle()->getY()<<"\n";
-    cout<<"Radius bei : "<<Kreis_neu.getRadius()<<"\n";
+    cout<<"Mittelpuntk bei : "<<Kreis_neu->getMiddle()->getX()<<"/"<<Kreis_neu->getMiddle()->getY()<<"\n";
+    cout<<"Radius bei : "<<Kreis_neu->getRadius()<<"\n";
  
     
     
