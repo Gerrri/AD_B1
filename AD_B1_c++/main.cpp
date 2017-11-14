@@ -66,22 +66,21 @@ int main(int argc, char** argv) {
     
     CIRCLE *AB_hkreis = hilfskreis(A,B);//hilfskreis(*A,*B);
     CIRCLE *BA_hkreis = hilfskreis(B,A);
-    CIRCLE *BC_hkreis = hilfskreis(B,C);
+    CIRCLE *BC_hkreis = hilfskreis(B,C);    
     CIRCLE *CB_hkreis = hilfskreis(C,B);
-    
-    
-    
+   
     // A4
     // Geraden (von schnittpunkten)ermitteln A/B B/C
     LINE *AB_schnitt_gerade = AB_hkreis->intersects(BA_hkreis); //gerade durch schnittpunkt A/B - B/A
     LINE *BC_schnitt_gerade = BC_hkreis->intersects(CB_hkreis); //gerade durch schnittpunkt B/C - C/B
     
+   
     if(AB_schnitt_gerade->parallelTo(BC_schnitt_gerade)==1){ //Abbruch wenn geraden paralle sind
         cout<<"\nFehler [die Geraden sind Parallel]- Bitte starten Sie das Programm Neu!";
         return 0;
     }
     
-    double abcdefghijklmnop = AB_schnitt_gerade->meets(BC_schnitt_gerade).getY();
+
     POINT *Mitte_Kreis_neu = new POINT(AB_schnitt_gerade->meets(BC_schnitt_gerade).getX(),AB_schnitt_gerade->meets(BC_schnitt_gerade).getY()); // neuer Punkt -> Schnittpunkt der beiden geraden
     double Radius_Kreis_neu = Mitte_Kreis_neu->distanceTo(*A);            // neuer Radius -> Radius = Abstand neuer Punkt zu einem der Ausgangspunkte
     
@@ -101,13 +100,16 @@ int main(int argc, char** argv) {
 }
 
 //Hilfskreis Funktion
-CIRCLE* hilfskreis(POINT *A, POINT *B){
+CIRCLE* hilfskreis(POINT *X, POINT *Y){
     double d,R,R_final;
-    d = A->distanceTo(*B); 
+    d = X->distanceTo(*Y); 
     R = d/2; // Radius damit sich die Kreise berühren
     R_final = R+(R/2); // Radius ein wenig vergrößert damit sich die Kreise schneiden
         
-    CIRCLE* a = new CIRCLE(A,R_final);
+    CIRCLE* a = new CIRCLE(X,R_final);
+    
+    //delete X;
+    //delete Y;
    
     return (a);
 }

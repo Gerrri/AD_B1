@@ -21,7 +21,7 @@ POINT::POINT(double x, double y) {
     this->x = x;
     this->y = y;
     
-    cout<<"\nthis:"<<this->x<<","<<this->y<<","<<"\nxy:"<<x<<","<<y;
+    //cout<<"\nthis:"<<this->x<<","<<this->y<<","<<"\nxy:"<<x<<","<<y;
 }
 
 POINT::POINT(const POINT& orig) {
