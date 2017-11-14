@@ -58,10 +58,10 @@ LINE *CIRCLE::intersects(CIRCLE* C) {
     double y1= (this->Middle->Skalarprodukt(this->Middle));
     
     
-    POINT *s1 = new POINT    (2 * (this->Middle->getX() - C->Middle->getX()) , 
+    POINT *s1 = new POINT   (2 * (this->Middle->getX() - C->Middle->getX()) , 
                             (2 * (this->Middle->getY() - C->Middle->getY())));
     
-    POINT *s2 = new POINT    (s1->getY(), -s1->getX()); // senkrecht zu s1
+    POINT *s2 = new POINT   (s1->getY(), -s1->getX()); // senkrecht zu s1
     
     double c =  ((C->Middle->Skalarprodukt(C->Middle)) - (this->Middle->Skalarprodukt(this->Middle)))
                 - ((C->Radius*C->Radius)-(this->Radius*this->Radius));
