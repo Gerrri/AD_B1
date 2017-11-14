@@ -14,12 +14,14 @@
 #include "POINT.h"
 #include <iostream>
 #include <math.h>
+using namespace std;
 
 
-
-POINT::POINT(const double x, const double y) {
+POINT::POINT(double x, double y) {
     this->x = x;
     this->y = y;
+    
+    cout<<"\nthis:"<<this->x<<","<<this->y<<","<<"\nxy:"<<x<<","<<y;
 }
 
 POINT::POINT(const POINT& orig) {
@@ -67,5 +69,33 @@ double POINT::getBetrag(){
    Betrag = sqrt(pow(this->x,2)+pow(this->y,2));
    return Betrag;
 }
+
+double POINT :: Skalarprodukt(POINT *b) {
+    double k;
+    
+    //a1*b1 + a2*b2 -> Skalarprodukt
+    k = (this->x * b->getX()) + (this->y * b->getY());
+    
+    
+    //cout<<"k: "<<k <<this->x<<"*"<<b->getX()<<"+"<<this->y<<"*"<<b->getY();
+    return k;
+}
+
+POINT POINT::Addition(POINT b) {
+    double x,y; 
+        x = this->x+b.x;
+        y = this->y+b.y;
+
+    return *(new POINT(x,y));
+}
+
+POINT POINT::Scale(double a) {
+   double x,y;
+        x = this->x*a;
+        y = this->y*a;
+        
+   return *(new POINT(x,y));
+}
+
 
 

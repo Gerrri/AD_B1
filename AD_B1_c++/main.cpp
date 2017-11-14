@@ -52,6 +52,7 @@ int main(int argc, char** argv) {
     cout<<"B :"<<B->getX()<<"/"<<B->getY()<<"\n";
     cout<<"C :"<<C->getX()<<"/"<<C->getY()<<"\n";
     
+    
     // Aufgabe 2 Abbrechn fals Punkte Doppelt
     // Vergleichen von A/B A/C C/B (einzelne Attribute)
     if(A->equalTo(*B) || B->equalTo(*C) || C->equalTo(*B)){
@@ -104,7 +105,7 @@ CIRCLE* hilfskreis(POINT *A, POINT *B){
     double d,R,R_final;
     d = A->distanceTo(*B); 
     R = d/2; // Radius damit sich die Kreise berühren
-    R_final = R+(R/10000); // Radius ein wenig vergrößert damit sich die Kreise schneiden
+    R_final = R+(R/2); // Radius ein wenig vergrößert damit sich die Kreise schneiden
         
     CIRCLE* a = new CIRCLE(A,R_final);
    

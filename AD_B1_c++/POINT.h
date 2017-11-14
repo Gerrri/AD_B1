@@ -16,7 +16,7 @@
 
 class POINT {
 public:
-    POINT(const double x, const double y);
+    POINT(double x, double y);
     POINT(const POINT& orig);
     virtual ~POINT();
     
@@ -28,6 +28,10 @@ public:
     bool equalTo(POINT in_point);
     double distanceTo(POINT in_point);
     double getBetrag ();
+    double Skalarprodukt(POINT *b);
+    POINT Addition(POINT b);
+    POINT Scale(double a); 
+
     
 private:
     double x;

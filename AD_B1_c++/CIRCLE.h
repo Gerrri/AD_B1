@@ -15,6 +15,8 @@
 #define CIRCLE_H
 #include "LINE.h"
 #include "POINT.h"
+#include <iostream>
+
 
 
 class CIRCLE {
@@ -27,6 +29,7 @@ public:
     CIRCLE (double X, double Y, double R);
     
     LINE *intersects(CIRCLE *C);
+    
     
 
     POINT* getMiddle() const {return Middle;}

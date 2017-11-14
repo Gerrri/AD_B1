@@ -16,6 +16,8 @@
 #include "POINT.h"
 #include <math.h>
 
+using namespace std;
+
 CIRCLE::CIRCLE() {}
 CIRCLE::CIRCLE(const CIRCLE& orig) {}
 CIRCLE::~CIRCLE() {}
@@ -26,6 +28,11 @@ CIRCLE::CIRCLE(POINT* M, double R){ // ACHTUNG KOPIE VON M ERSTELLEN warum - son
     //*punkt_m.setX(*M->getX());    //M(x) Kopieren
     //*punkt_m.setY(*M->getY());      //M(y) Kopieren
     this->Middle = punkt_m;
+    
+    //DEBUGG::STARTE
+    //cout<<"\nMID :"<<this->Middle->getX()<<","<<this->Middle->getY()<<"\npunkt_m :"<<punkt_m->getX()<<","<<punkt_m->getY();
+    //DEBUGG::ENDE
+    
     this->Radius = R;
     this->umfang = M_PI*2*R;
     this->flaeche = M_PI*pow(R,2);
@@ -44,27 +51,45 @@ CIRCLE::CIRCLE(double X, double Y, double R){
 }
 
 LINE *CIRCLE::intersects(CIRCLE* C) {
+    
+    double x1=0;
+    
+    
+    double y1= (this->Middle->Skalarprodukt(this->Middle));
+    
+    
+    POINT *s1 = new POINT    (2 * (this->Middle->getX() - C->Middle->getX()) , 
+                            (2 * (this->Middle->getY() - C->Middle->getY())));
+    
+    POINT *s2 = new POINT    (s1->getY(), -s1->getX()); // senkrecht zu s1
+    
+    double c =  ((C->Middle->Skalarprodukt(C->Middle)) - (this->Middle->Skalarprodukt(this->Middle)))
+                - ((C->Radius*C->Radius)-(this->Radius*this->Radius));
+
+    
+    double s    =   -c / (s1->getBetrag()*s1->getBetrag());
+    double p_h  =   (s2->Skalarprodukt(this->Middle) / s1->getBetrag() * this->Radius);
+    double q    =   pow(c,2) / pow(s1->getBetrag(),4) + 2*c*s1->Skalarprodukt(this->Middle) /
+                    pow(s1->getBetrag(),4) + (this->Middle->Skalarprodukt(this->Middle)-this->Radius*this->Radius) /
+                    (s1->getBetrag()*s1->getBetrag());
+    
+    double sqrtVal = sqrt(pow(p_h,2) - q);
+    double d1 = p_h - sqrtVal;
+    double d2 = p_h + sqrtVal;
+    
+    
+    
+    POINT p1 = (s1->Scale(s)).Addition((s2->Scale(d1)));
+    POINT p2 = (s1->Scale(s)).Addition((s2->Scale(d2)));
+    
+    delete s1;
+    delete s2;
+    
+    return (new LINE (&p1, &p2));
+    
+    /*
 
 
-
-    POINT * n1 = new POINT(
-            2 * (this->Middle->getX() - C->Middle->getX()),
-            2 * (this->Middle->getY() - C->Middle->getY()));
-    POINT * n2 = new POINT(n1->getY(), -n1->getX()); // orthogonal to n1
-
-    double c = (C->Middle * C->Middle - this->Middle * this->Middle) -
-            (C->Radius * C->Radius - this->Radius * this->Radius);
-
-    double s = -c / (n1->getBetrag() * n1->getBetrag()); // lambda s
-
-    double p_half = (*n2 * *this->Middle) / (n1->getBetrag() * n1->getBetrag());
-    double q = (c * c) / (n1->getBetrag() * n1->getBetrag() * n1->getBetrag() * n1->getBetrag()) +
-            (2 * c * (*n1 * *this->Middle)) / (n1->getBetrag() * n1->getBetrag() * n1->getBetrag() * n1->getBetrag()) +
-            (*this->Middle * *this->Middle - this->Radius * this->Radius) / (n1->getBetrag() * n1->getBetrag());
-
-    double sqrtVal = sqrt(p_half*p_half - q);
-    double d1 = p_half - sqrtVal;
-    double d2 = p_half + sqrtVal;
     
     POINT s1 = *n1 * s + *n2 * d1;
     POINT s2 = *n1 * s + *n2 * d2;
@@ -73,10 +98,28 @@ LINE *CIRCLE::intersects(CIRCLE* C) {
     delete n2;
     
     return new LINE(&s1, &s2);
-    
+    */
 }
+/*
+    POINT * n1 = new POINT(
+            2 * (this->Middle->getX() - C->Middle->getX()),
+            2 * (this->Middle->getY() - C->Middle->getY()));
+    POINT * n2 = new POINT(n1->getY(), -n1->getX()); // orthogonal to n1
 
+    double c = (C->Middle * C->Middle - this->Middle * this->Middle) -
+            (C->Radius * C->Radius - this->Radius * this->Radius);
+ 
+    double s = -c / (n1->getBetrag() * n1->getBetrag()); // lambda s
 
+    double p_half = (*n2 * *this->Middle) / (n1->getBetrag() * n1->getBetrag());
+    double q = (c * c) / (n1->getBetrag() * n1->getBetrag() * n1->getBetrag() * n1->getBetrag()) +
+            (2 * c * (*n1 * *this->Middle)) / (n1->getBetrag() * n1->getBetrag() * n1->getBetrag() * n1->getBetrag()) +
+            (*this->Middle * *this->Middle - this->Radius * this->Radius) / (n1->getBetrag() * n1->getBetrag());
+ * 
+    double sqrtVal = sqrt(p_half*p_half - q);
+    double d1 = p_half - sqrtVal;
+    double d2 = p_half + sqrtVal;
+*/
 /*
 LINE* CIRCLE::intersects(CIRCLE* C) {
    
@@ -110,47 +153,49 @@ LINE* CIRCLE::intersects(CIRCLE* C) {
  
     
   */  
-  /*
-    POINT *A_p = this->Middle;           //Mittelpunkt this
-    POINT *B_p = C->getMiddle();         //Mittelpunkt C
-    double a  = this->Radius;           //Rad Kreis this
-    double b  = C->getRadius();         //Rad Kreis C
-    double c  = A_p->distanceTo(*B_p);   //Abstand a,b
-    double x,y;                         //zwischenspeicher
-    double Ax=A_p->getX();               //x von A
-    double Bx=B_p->getX();               //x von B
-    double Ay=A_p->getY();               //y von A
-    double By=B_p->getY();               //y von B
-    double Q1_x,Q2_x,Q1_y,Q2_y;
+/*
+  POINT *A_p = this->Middle;           //Mittelpunkt this
+  POINT *B_p = C->getMiddle();         //Mittelpunkt C
+  double a  = this->Radius;           //Rad Kreis this
+  double b  = C->getRadius();         //Rad Kreis C
+  double c  = A_p->distanceTo(*B_p);   //Abstand a,b
+  double x,y;                         //zwischenspeicher
+  double Ax=A_p->getX();               //x von A
+  double Bx=B_p->getX();               //x von B
+  double Ay=A_p->getY();               //y von A
+  double By=B_p->getY();               //y von B
+  double Q1_x,Q2_x,Q1_y,Q2_y;
     
 
    
     
-    x=(pow(a,2)+pow(c,2)-pow(b,2))/2*c; //Kreisformel und Pythagoras kombiniert
-    y=sqrt(pow(a,2)+pow(x,2));          //Pythagoras (einsetzen)
+  x=(pow(a,2)+pow(c,2)-pow(b,2))/2*c; //Kreisformel und Pythagoras kombiniert
+  y=sqrt(pow(a,2)+pow(x,2));          //Pythagoras (einsetzen)
     
-    // berechnung Q1(x)
-    Q1_x    = Ax    +   x*  ((Bx-Ax)/c)   -   y*    ((By-Ay)/c);
+  // berechnung Q1(x)
+  Q1_x    = Ax    +   x*  ((Bx-Ax)/c)   -   y*    ((By-Ay)/c);
     
-    // berechnung Q2(x)
-    Q2_x    = Ax    +   x*  ((Bx-Ax)/c)   +   y*    ((By-Ay)/c);
+  // berechnung Q2(x)
+  Q2_x    = Ax    +   x*  ((Bx-Ax)/c)   +   y*    ((By-Ay)/c);
     
-    // berechnung Q1(y)
-    Q1_y    = Ay    +   x*  ((By-Ay)/c)   +   y*    ((Bx-Ax)/c);
+  // berechnung Q1(y)
+  Q1_y    = Ay    +   x*  ((By-Ay)/c)   +   y*    ((Bx-Ax)/c);
  
-    // berechnung Q2(y)
-    Q2_y    = Ay    +   x*  ((By-Ay)/c)   -   y*    ((Bx-Ax)/c);
+  // berechnung Q2(y)
+  Q2_y    = Ay    +   x*  ((By-Ay)/c)   -   y*    ((Bx-Ax)/c);
  
     
-    POINT* Q1 = new POINT(Q1_x,Q1_y); //Schnittpunkt 1
-    POINT* Q2 = new POINT(Q2_x,Q2_y); //Schnittpunkt 2
+  POINT* Q1 = new POINT(Q1_x,Q1_y); //Schnittpunkt 1
+  POINT* Q2 = new POINT(Q2_x,Q2_y); //Schnittpunkt 2
     
     
-    LINE *ret_line = new LINE(Q1,Q2);
-    return ret_line;
+  LINE *ret_line = new LINE(Q1,Q2);
+  return ret_line;
    
 }
-*/
+ */
+
+
 
 
 
