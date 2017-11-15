@@ -78,6 +78,8 @@ LINE *CIRCLE::intersects(CIRCLE* C) {
     POINT p1 = (s1->Scale(s)).Addition((s2->Scale(d1)));
     POINT p2 = (s1->Scale(s)).Addition((s2->Scale(d2)));
     
+    
+    
     //delete s1;
     //delete s2;
     
