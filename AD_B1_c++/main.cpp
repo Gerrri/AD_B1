@@ -24,6 +24,13 @@ int main(int argc, char** argv) {
     double X,Y;
     CIRCLE* hilfskreis(POINT *A, POINT *B);
     
+    LINE *eins = new LINE (1,1,3,3);
+    LINE *zwei = new LINE (3,1,1,3);
+    
+    POINT *schnitt = new POINT (eins->meets(zwei));
+    
+    cout<<"Schnittpunkt : ("<<schnitt->getX()<<"/"<<schnitt->getY()<<")";
+  
 
     // AUFGABE 1 -> Einlesen der Punkte A,B,C 
     cout<<"Bitte x y für A eingeben: \n";
@@ -60,6 +67,8 @@ int main(int argc, char** argv) {
         return 0;
     }
     
+        
+
     // Aufgabe 3 Konstruieren von Hilfskreisen um Punkte A,B,C sodass sich 2 Kreise schneiden
     // hilfskreis A/B B/A B/C C/B mit Methode "hilfskreis"
     
