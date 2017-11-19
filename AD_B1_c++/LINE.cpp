@@ -26,7 +26,7 @@ LINE::LINE(double X1, double Y1, double X2, double Y2){
     this->A = Y1 - Y2;
     this->B = X2 - X1;
     this->C = X1 * Y2 - (X2 * Y1);
-    normalize();
+   normalize();
 }
 
 LINE::LINE(POINT *P1, POINT *P2){
@@ -60,7 +60,13 @@ LINE::parallelTo(LINE* L){
 }
 
 LINE::normalize(){
-    this->A = this->A/sqrt(pow(this->A,2)+pow(this->B,2));
-    this->B = this->B/sqrt(pow(this->A,2)+pow(this->B,2));
-    this->C = this->C/sqrt(pow(this->A,2)+pow(this->B,2));
+    double a=this->A;
+    double b=this->B;
+    double c=this->C;
+    
+    
+    this->A = a /(sqrt(pow(a,2)+pow(b,2)));
+    this->B = b /(sqrt(pow(a,2)+pow(b,2)));
+    this->C = c /(sqrt(pow(a,2)+pow(b,2)));
+    
 }
