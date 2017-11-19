@@ -97,10 +97,11 @@ int main(int argc, char** argv) {
     
     
     //Ausgabe
+    cout<<"Daten vom Generierten Kreis: ";
     cout<<"Mittelpuntk bei : "<<Kreis_neu->getMiddle()->getX()<<"/"<<Kreis_neu->getMiddle()->getY()<<"\n";
     cout<<"Radius bei : "<<Kreis_neu->getRadius()<<"\n";
  
-    
+    /* Zum Werte Prüfen einkommentieren !
     cout<<"\n\n Übersicht der Werte:\n";
     cout<<"Hilfskreis AB : Punkt :  ("<<AB_hkreis->getMiddle()->getX()<<","<<AB_hkreis->getMiddle()->getY()<<") || Radius: "<<AB_hkreis->getRadius()<<"\n";
     cout<<"Hilfskreis BA : Punkt :  ("<<BA_hkreis->getMiddle()->getX()<<","<<BA_hkreis->getMiddle()->getY()<<") || Radius: "<<BA_hkreis->getRadius()<<"\n";
@@ -109,6 +110,8 @@ int main(int argc, char** argv) {
     cout<<"\n";
     cout<<"Linie      AB : Punkt :("<<AB_schnitt_gerade->getA()<<","<<AB_schnitt_gerade->getB()<<") || Steigung : "<<AB_schnitt_gerade->getC()<<"\n";
     cout<<"Linie      BC : Punkt :("<<BC_schnitt_gerade->getA()<<","<<BC_schnitt_gerade->getB()<<") || Steigung : "<<BC_schnitt_gerade->getC()<<"\n";    
+    */
+    
     return 0;
 }
 

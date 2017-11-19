@@ -26,14 +26,14 @@ LINE::LINE(double X1, double Y1, double X2, double Y2){
     this->A = Y1 - Y2;
     this->B = X2 - X1;
     this->C = X1 * Y2 - (X2 * Y1);
-    //normalize();
+    normalize();
 }
 
 LINE::LINE(POINT *P1, POINT *P2){
     this->A = P1->getY() - P2->getY(); //Y1-Y2;
     this->B = P2->getX() - P1->getX(); //X2-X1;
     this->C = P1->getX() * P2->getY()-(P2->getX() * P1->getY()); //X1*Y2-(X2*Y1);
-    //normalize();
+   normalize();
 }
 
 POINT LINE :: meets (LINE* L){ //meets
@@ -60,7 +60,7 @@ LINE::parallelTo(LINE* L){
 }
 
 LINE::normalize(){
-    this->A = A/sqrt(pow(A,2)+pow(B,2));
-    this->B = B/sqrt(pow(A,2)+pow(B,2));
-    this->C = C/sqrt(pow(A,2)+pow(B,2));
+    this->A = this->A/sqrt(pow(this->A,2)+pow(this->B,2));
+    this->B = this->B/sqrt(pow(this->A,2)+pow(this->B,2));
+    this->C = this->C/sqrt(pow(this->A,2)+pow(this->B,2));
 }
