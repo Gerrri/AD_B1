@@ -53,10 +53,20 @@ POINT LINE :: meets (LINE* L){ //meets
 }
 
 LINE::parallelTo(LINE* L){
-    if((A/B)==(L->A/L->B)){
-        return 1; //geraden sind Parallel
-    }
-    return 0;
+        double A1, B1, C1, A2, B2, C2;
+        A1 = this->A;
+        B1 = this->B;
+        C1 = this->C;
+        A2 = L->getA();
+        B2 = L->getB();
+        C2 = L->getC();
+        
+        
+        if (fabs(A2*B1-(A1*B2))<pow(2, -52)) {
+            return 1; //geraden sind Parallel
+        }
+        
+        return 0;
 }
 
 LINE::normalize(){
