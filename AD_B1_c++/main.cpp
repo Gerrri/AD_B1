@@ -22,14 +22,14 @@ using namespace std;
 int main(int argc, char** argv) {
     POINT *A, *B, *C;
     double X,Y;
-    CIRCLE* hilfskreis(POINT *A, POINT *B);
+    CIRCLE* hilfskreis(POINT *A, POINT *B); // Methode deklariert
     
-    LINE *eins = new LINE (1,1,3,3);
-    LINE *zwei = new LINE (3,1,1,3);
+    //LINE *eins = new LINE (1,1,3,3);
+    //LINE *zwei = new LINE (3,1,1,3);
     
-    POINT *schnitt = new POINT (eins->meets(zwei));
+    //POINT *schnitt = new POINT (eins->meets(zwei));
     
-    cout<<"Schnittpunkt : ("<<schnitt->getX()<<"/"<<schnitt->getY()<<")";
+    //cout<<"Schnittpunkt : ("<<schnitt->getX()<<"/"<<schnitt->getY()<<")";
   
 
     // AUFGABE 1 -> Einlesen der Punkte A,B,C 
@@ -54,15 +54,16 @@ int main(int argc, char** argv) {
     cin>>Y;
     C=new POINT (X,Y);
     
+    //Ausgabe Punkte
     cout<<"\nPunkte A,B,C: \n";
     cout<<"A :"<<A->getX()<<"/"<<A->getY()<<"\n";
     cout<<"B :"<<B->getX()<<"/"<<B->getY()<<"\n";
     cout<<"C :"<<C->getX()<<"/"<<C->getY()<<"\n";
     
     
-    // Aufgabe 2 Abbrechn fals Punkte Doppelt
+    // Aufgabe 2 abbrechen fals Punkte Doppelt
     // Vergleichen von A/B A/C C/B (einzelne Attribute)
-    if(A->equalTo(*B) || B->equalTo(*C) || C->equalTo(*B)){
+    if(A->equalTo(*B) || A->equalTo(*C) || C->equalTo(*B)){
         cout<<"\nFehler [mind. 2 mal der Gleiche Punkt]- Bitte starten Sie das Programm Neu!";
         return 0;
     }
@@ -101,6 +102,7 @@ int main(int argc, char** argv) {
     cout<<"Mittelpuntk bei : "<<Kreis_neu->getMiddle()->getX()<<"/"<<Kreis_neu->getMiddle()->getY()<<"\n";
     cout<<"Radius bei : "<<Kreis_neu->getRadius()<<"\n";
  
+    
     /* Zum Werte Prüfen einkommentieren !
     cout<<"\n\n Übersicht der Werte:\n";
     cout<<"Hilfskreis AB : Punkt :  ("<<AB_hkreis->getMiddle()->getX()<<","<<AB_hkreis->getMiddle()->getY()<<") || Radius: "<<AB_hkreis->getRadius()<<"\n";

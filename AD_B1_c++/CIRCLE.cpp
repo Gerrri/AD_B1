@@ -25,8 +25,6 @@ CIRCLE::~CIRCLE() {}
 CIRCLE::CIRCLE(POINT* M, double R){ // ACHTUNG KOPIE VON M ERSTELLEN warum - sonst wird referenziertes Objekt veändert?!?!
     //Erstelle Kreis um Punkt(POINT M) mit Radius R
     POINT *punkt_m= new POINT(M->getX(),M->getY()); 
-    //*punkt_m.setX(*M->getX());    //M(x) Kopieren
-    //*punkt_m.setY(*M->getY());      //M(y) Kopieren
     this->Middle = new POINT (*punkt_m);
     
     //DEBUGG::STARTE
@@ -85,47 +83,7 @@ LINE *CIRCLE::intersects(CIRCLE* C) {
     
     return (new LINE (&p1, &p2));
 }   
-/*
-  POINT *A_p = this->Middle;           //Mittelpunkt this
-  POINT *B_p = C->getMiddle();         //Mittelpunkt C
-  double a  = this->Radius;           //Rad Kreis this
-  double b  = C->getRadius();         //Rad Kreis C
-  double c  = A_p->distanceTo(*B_p);   //Abstand a,b
-  double x,y;                         //zwischenspeicher
-  double Ax=A_p->getX();               //x von A
-  double Bx=B_p->getX();               //x von B
-  double Ay=A_p->getY();               //y von A
-  double By=B_p->getY();               //y von B
-  double Q1_x,Q2_x,Q1_y,Q2_y;
-    
 
-   
-    
-  x=(pow(a,2)+pow(c,2)-pow(b,2))/2*c; //Kreisformel und Pythagoras kombiniert
-  y=sqrt(pow(a,2)+pow(x,2));          //Pythagoras (einsetzen)
-    
-  // berechnung Q1(x)
-  Q1_x    = Ax    +   x*  ((Bx-Ax)/c)   -   y*    ((By-Ay)/c);
-    
-  // berechnung Q2(x)
-  Q2_x    = Ax    +   x*  ((Bx-Ax)/c)   +   y*    ((By-Ay)/c);
-    
-  // berechnung Q1(y)
-  Q1_y    = Ay    +   x*  ((By-Ay)/c)   +   y*    ((Bx-Ax)/c);
- 
-  // berechnung Q2(y)
-  Q2_y    = Ay    +   x*  ((By-Ay)/c)   -   y*    ((Bx-Ax)/c);
- 
-    
-  POINT* Q1 = new POINT(Q1_x,Q1_y); //Schnittpunkt 1
-  POINT* Q2 = new POINT(Q2_x,Q2_y); //Schnittpunkt 2
-    
-    
-  LINE *ret_line = new LINE(Q1,Q2);
-  return ret_line;
-   
-}
- */
 
 
 

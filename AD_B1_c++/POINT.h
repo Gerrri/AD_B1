@@ -17,7 +17,7 @@
 class POINT {
 public:
     POINT(double x, double y);
-    POINT(const POINT& orig);
+    POINT(const POINT& orig); //Copy Konstruktor
     virtual ~POINT();
     
     double getX();

@@ -62,7 +62,7 @@ LINE::parallelTo(LINE* L){
         C2 = L->getC();
         
         
-        if (fabs(A2*B1-(A1*B2))<pow(2, -52)) {
+        if (fabs(A2*B1-(A1*B2))<pow(2, -52)) { //ab bestimmter Nachkommastelle abgeschnitten
             return 1; //geraden sind Parallel
         }
         
